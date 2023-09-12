@@ -1,7 +1,7 @@
 /*
  *Programmer:Urooj Baloch
  *Date:11th september 2023
- *Description:Question 1,Lab 4.
+ *Description:Question 2,Lab 4.
  */
 
 #include <stdio.h>
@@ -15,8 +15,9 @@ int main () {
               while(a<=n) {
                            printf("\n");
                            a=a+1;
+                           int b=0;
               while(b<n){
-                         printf("* \n");
+                         printf("*");
                          b=b+1;
                                }
 }
