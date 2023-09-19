@@ -1,15 +1,13 @@
 uuur#include <stdio.h>
 
 main() {
-int r, h;
-float Pi=2,3, Volume=0;
-Pi=2,3;
-printf("enter Value\n");
-printf("enter Value\n");
-
-
+int r, h; volume=0;
+float Pi=3.141;
+printf("enter Value of r\n");
 scanf("%d ,&r);
+printf("enter Value of h\n");
 scanf("%d",&h);
+
 
 volume=Pi*r*r*h*;
 printf("%f ,volume);
@@ -17,4 +15,4 @@ printf("%f ,volume);
 
 
 return 1;
-        
+}       
