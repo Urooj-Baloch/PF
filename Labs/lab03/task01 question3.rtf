@@ -1,7 +1,8 @@
 
- #include <stdio.>
-Int main (){
-                    Int base, per,hyp=0;
+ #include <stdio.h>
+#include<math.h>
+int main (){
+                    int base, per,hyp;
                     printf("enter value of base\n");
                     scanf("%d",&base);
                     printf("enter value of per\n");
@@ -9,7 +10,7 @@ Int main (){
                     
                     scanf("%d" ,&per);
 
-                     hyp=(base*base+per*per)^1/2;
-                      printf("%d",hyp);
+                     hyp=sqrt(base*base+per*per);
+                      printf(" the hyp is %d",hyp);
           return 1;
 }
