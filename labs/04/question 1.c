@@ -7,7 +7,7 @@
  
 int main () {
             int n=0;
-            int x=50
+            int x=50;
             
             
              while(n<=x){
@@ -18,7 +18,7 @@ int main () {
                       printf("*");
                       m=m+1;
                   }
-                  n=n+1;
+                  n=n+2;
               }
                            
 }//end main()
