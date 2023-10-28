@@ -1,6 +1,6 @@
 /* Programmer:Urooj Baloch
 Date:3-10-2023
-Description:Generate febbonacci series upto 10000 and find the sum of generated febbonacci numbers divisible by 3,5 and 7 only
+Description:Q7 lab 6 sum of elements of array
 */
 #include <stdio.h>
 int main() {
