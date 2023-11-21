@@ -1,6 +1,6 @@
 /* Programmer:Urooj Baloch
 Date:21-11-2023
-Description:queation 1 lab 11
+Description:question 2 lab 11
 */
 #include <stdio.h>
 #include <string.h>
