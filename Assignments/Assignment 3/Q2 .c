@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 
-struct Dept {
+struct Dep {
     char Name[20];
     char Role[20];
     int Communication;
@@ -13,9 +13,9 @@ struct Dept {
 
 char* NameRand(char Names[20][20], int Name_Used[20]);
 char* RoleRand(char Roles[5][20], int Role_Used[5]);
-void InitializeDept(struct Dept dept[], char Names[20][20], int Name_Used[20]);
-void PrintDept(struct Dept dept[]);
-int DeptSum(struct Dept dept[]);
+void InitializeDep(struct Dep dep[], char Names[20][20], int Name_Used[20]);
+void PrintDep(struct Dep dep[]);
+int DepSum(struct Dep dep[]);
 
 int main() {
      int i;
@@ -29,17 +29,17 @@ int main() {
                               "Ali", "rabeel", "Razia", "Aiza"};
     int NameUsed[20] = {0};
 
-    struct Dept HR[5];
-    struct Dept Finance[5];
-    struct Dept Marketing[5];
-    struct Dept Logistics[5];
+    struct Dep HR[5];
+    struct Dep Finance[5];
+    struct Dep Marketing[5];
+    struct Dep Logistics[5];
 
-    InitializeDept(HR, NamePool, NameUsed);
-    InitializeDept(Finance, NamePool, NameUsed);
-    InitializeDept(Marketing, NamePool, NameUsed);
-    InitializeDept(Logistics, NamePool, NameUsed);
+    InitializeDep(HR, NamePool, NameUsed);
+    InitializeDep(Finance, NamePool, NameUsed);
+    InitializeDep(Marketing, NamePool, NameUsed);
+    InitializeDep(Logistics, NamePool, NameUsed);
 
-    int sum[4] = {DeptSum(HR), DeptSum(Finance), DeptSum(Marketing), DeptSum(Logistics)};
+    int sum[4] = {DepSum(HR), DepSum(Finance), DepSum(Marketing), DepSum(Logistics)};
     int maxIndex = 0;
     int maxSum = sum[0];
 
@@ -52,19 +52,19 @@ int main() {
 
     switch (maxIndex) {
         case 0:
-            PrintDept(HR);
+            PrintDep(HR);
             break;
 
         case 1:
-            PrintDept(Finance);
+            PrintDep(Finance);
             break;
 
         case 2:
-            PrintDept(Marketing);
+            PrintDep(Marketing);
             break;
 
         case 3:
-            PrintDept(Logistics);
+            PrintDep(Logistics);
             break;
 
         default:
@@ -94,40 +94,40 @@ char* RoleRand(char Roles[5][20], int Role_Used[5]) {
     }
 }
 
-void InitializeDept(struct Dept dept[], char Names[20][20], int Name_Used[20]) {
+void InitializeDep(struct Dep dep[], char Names[20][20], int Name_Used[20]) {
     char Roles[5][20] = {"Director", "Executive", "Manager ", "Employee", "Trainee "};
     int RoleUsed[5] = {0};
 
     for (int i = 0; i < 5; i++) {
-        strcpy(dept[i].Name, NameRand(Names, Name_Used));
-        strcpy(dept[i].Role, RoleRand(Roles, RoleUsed));
-        dept[i].Communication = rand() % 101;
-        dept[i].Creativity = rand() % 101;
+        strcpy(dep[i].Name, NameRand(Names, Name_Used));
+        strcpy(dep[i].Role, RoleRand(Roles, RoleUsed));
+        dep[i].Communication = rand() % 101;
+        dep[i].Creativity = rand() % 101;
         dept[i].Teamwork = rand() % 101;
     }
 }
 
-void PrintDept(struct Dept dept[]) {
+void PrintDep(struct Dep dep[]) {
     printf("\n***************************************************************\n");
     printf("| %-10s | %-15s | Communication | Creativity | Teamwork |\n", "Name", "Role");
     printf("*************************************************************\n");
 
     for (int i = 0; i < 5; i++) {
         printf("| %-10s | %-15s | %-13d | %-10d | %-8d |\n",
-               dept[i].Name,
-               dept[i].Role,
-               dept[i].Communication,
-               dept[i].Creativity,
-               dept[i].Teamwork);
+               dep[i].Name,
+               dep[i].Role,
+               dep[i].Communication,
+               dep[i].Creativity,
+               dep[i].Teamwork);
     }
 
     printf("*************************************************************\n");
 }
 
-int DeptSum(struct Dept dept[]) {
+int DepSum(struct Dep dep[]) {
     int sum = 0;
     for (int i = 0; i < 5; i++) {
-        sum += dept[i].Communication + dept[i].Creativity + dept[i].Teamwork;
+        sum += dep[i].Communication + dep[i].Creativity + dep[i].Teamwork;
     }
     return sum;
     
