@@ -1,96 +1,74 @@
-/*
- * Programmer:Urooj Baloch
- * Date: 8/12/23
- * Description: Q1.c
- */
+/* programmer:urooj baloch
+Date:9 dec 2023
+ description : Q3   
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int** readMatrixFromFile(char* filename, int size) {
-    int i, j;
-    FILE* file = fopen(filename, "r");
-    if (file == NULL) {
-        perror("Error opening file");
-        exit(EXIT_FAILURE);
-    }
+void mergeAndWriteToFile(int recordIDs[], int numRecords);
 
-    int** matrix = (int**)malloc(size * sizeof(int*));
+int main() {
 
-    for (i = 0; i < size; i++) {
-        matrix[i] = (int*)malloc(size * sizeof(int));
-        for (j = 0; j < size; j++) {
-            if (fscanf(file, "%d", &matrix[i][j]) != 1) {
-                fprintf(stderr, "Error reading matrix from file\n");
-                exit(EXIT_FAILURE);
-            }
-            printf("Read value: %d\n", matrix[i][j]);
-        }
-    }
+    printf("***********Urooj Baloch***********\n");
+    int recordIDs[] = {23, 29, 40};
+    int numRecords = sizeof(recordIDs) / sizeof(recordIDs[0]);
 
-    fclose(file);
-    return matrix;
-}
-
-int** computeMaxValues(int** inputMatrix, int size) {
-    int newSize = size / 2;
-    int** resultMatrix = (int**)malloc(newSize * sizeof(int*));
-
-    for (int i = 0; i < newSize; i++) {
-        resultMatrix[i] = (int*)malloc(newSize * sizeof(int));
-        for (int j = 0; j < newSize; j++) {
-            int max = inputMatrix[2 * i][2 * j];
-            max = (inputMatrix[2 * i + 1][2 * j] > max) ? inputMatrix[2 * i + 1][2 * j] : max;
-            max = (inputMatrix[2 * i][2 * j + 1] > max) ? inputMatrix[2 * i][2 * j + 1] : max;
-            max = (inputMatrix[2 * i + 1][2 * j + 1] > max) ? inputMatrix[2 * i + 1][2 * j + 1] : max;
-            resultMatrix[i][j] = max;
-        }
-    }
-
-    return resultMatrix;
-}
-
-void printMatrix(int** matrix, int size) {
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-int main(int argc, char* argv[]) {
-    printf("********UROOJ BALOCH (23K-0071)*********\n");
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <matrix>\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
-
-    const char* studentID = "0071";
-    char student[10];
-    printf("\nEnter the student id: ");
-    scanf("%s", student);
-    int size = atoi(studentID) % 3 == 0 ? 8 : atoi(studentID) % 2 == 0 ? 4 : 2;
-
-    int** inputMatrix = readMatrixFromFile(argv[1], size);
-    int** resultMatrix = computeMaxValues(inputMatrix, size / 2);
-
-    printf("Input Matrix:\n");
-    printMatrix(inputMatrix, size);
-
-    printf("\nResult Matrix:\n");
-    printMatrix(resultMatrix, size / 2);
-
-    // Free allocated memory
-    for (int i = 0; i < size; i++) {
-        free(inputMatrix[i]);
-    }
-    free(inputMatrix);
-
-    for (int i = 0; i < size / 2; i++) {
-        free(resultMatrix[i]);
-    }
-    free(resultMatrix);
+    mergeAndWriteToFile(recordIDs, numRecords);
 
     return 0;
+}
+
+void mergeAndWriteToFile(int recordIDs[], int numRecords) {
+    FILE *personalFile, *departmentFile, *combineFile;
+
+    personalFile = fopen("personal.txt", "r");
+    departmentFile = fopen("department.txt", "r");
+    combineFile = fopen("combine.txt", "a");
+
+    if (personalFile == NULL || departmentFile == NULL || combineFile == NULL) {
+        perror("Error opening files");
+        exit(EXIT_FAILURE);
+    }
+
+    int currentID;
+    char name[50];
+    float salary;
+
+    for (int i = 0; i < numRecords; i++) {
+        // Read from Personal.txt
+        fseek(personalFile, 0, SEEK_SET);
+        int personalFound = 0;
+        while (fscanf(personalFile, "%d %s", &currentID, name) != EOF) {
+            if (currentID == recordIDs[i]) {
+                personalFound = 1;
+
+                // Read from Department.txt
+                fseek(departmentFile, 0, SEEK_SET);
+                int departmentFound = 0;
+                while (fscanf(departmentFile, "%d %f", &currentID, &salary) != EOF) {
+                    if (currentID == recordIDs[i]) {
+                        departmentFound = 1;
+
+                        // Write to Combine.txt
+                        fprintf(combineFile, "%d %s %.2f\n", currentID, name, salary);
+                        break;
+                    }
+                }
+
+                if (!departmentFound) {
+                    fprintf(stderr, "ID %d not found in department.txt\n", recordIDs[i]);
+                }
+
+                break;
+            }
+        }
+
+        if (!personalFound) {
+            fprintf(stderr, "ID %d not found in personal.txt\n", recordIDs[i]);
+        }
+    }
+
+    fclose(personalFile);
+    fclose(departmentFile);
+    fclose(combineFile);
 }
