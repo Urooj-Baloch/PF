@@ -22,7 +22,7 @@ int main() {
     printf("*******UROOJ BALOCH (23K-0071)*********\n");
     srand(time(NULL));
 
-    char NamePool[20][20] = {"urooj", "Zani", "Johar", "Farhana",
+    char NamePool[20][20] = {"urooj", "Zoni", "Johar", "Farhana",
                               "Bushra", "Mazhar", "Uzma", "Fawad",
                               "kalsoom", "amna", "Minal", "Uzair",
                               "Faiza", "rehana", "naina", "Fakhira",
@@ -130,5 +130,6 @@ int DeptSum(struct Dept dept[]) {
         sum += dept[i].Communication + dept[i].Creativity + dept[i].Teamwork;
     }
     return sum;
+    
 }
 
